@@ -13,6 +13,6 @@ class Author extends User
      */
     public function articles(): HasMany
     {
-        return $this->hasMany(Article::class);
+        return $this->hasMany(Article::class, 'author_id', 'id');
     }
 }
