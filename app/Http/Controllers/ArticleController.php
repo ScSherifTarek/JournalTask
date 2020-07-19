@@ -30,9 +30,9 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Article $article)
     {
-        //
+        return view('articles.form', compact('article'));
     }
 
     /**
@@ -65,7 +65,7 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        //
+        return view('articles.form', compact('article'));
     }
 
     /**
