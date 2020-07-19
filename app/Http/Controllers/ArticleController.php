@@ -41,9 +41,9 @@ class ArticleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Article $article)
     {
-        //
+        $this->update($request, $article);
     }
 
     /**
@@ -77,7 +77,16 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
-        //
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string|max:1000',
+        ]);
+
+        $article->fill($validatedData);
+
+        $request->user()->articles()->save($article);
+
+        return redirect()->route('articles.index');
     }
 
     /**

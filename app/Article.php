@@ -15,6 +15,15 @@ class Article extends Model
     protected $table = 'articles';
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'title', 'description',
+    ];
+
+    /**
      * Every user may have one or more articles
      * 
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
