@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Author;
 use App\Article;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,14 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
+        $authors = Author::select('id','name')
+                    ->with('articles:id,title,description,author_id')
+                    ->withCount('articles')
+                    ->orderBy('articles_count', 'desc')
+                    ->having('articles_count', '>', 0)
+                    ->get();
+        
+        return view('articles.index', compact('authors'));
     }
 
     /**
