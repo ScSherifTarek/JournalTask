@@ -19,6 +19,6 @@ class ArticlePolicy
      */
     public function update(Author $author, Article $article)
     {
-        return $article->isWrittenBy($author);
+        return $author->isAdmin() || $article->isWrittenBy($author);
     }
 }
