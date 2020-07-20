@@ -42,6 +42,9 @@
                                 @endif
                             @endcan
                         </div>
+                        <div class="card-footer text-muted">
+                            @lang('messages.written_by_with_count', ['author' => $author->name, 'count' => $author->articles_count])
+                        </div>
                     </div>
                 </div>
                 @endforeach
