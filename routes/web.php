@@ -18,3 +18,5 @@ Auth::routes();
 Route::redirect('/', 'articles')->name('home');
 
 Route::resource('articles', 'ArticleController', ['except' => ['show']]);
+
+Route::put('articles/{article}/approve', 'ArticleController@approve')->name('articles.approve');
