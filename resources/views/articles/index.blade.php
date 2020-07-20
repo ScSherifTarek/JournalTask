@@ -20,6 +20,13 @@
                             @can('update',$article)
                             <a href="{{ route('articles.edit', ['article' => $article]) }}" class="btn btn-success">@lang('common.edit')</a>
                             @endcan
+                            @can('delete',$article)
+                            <a href="javascript: document.getElementById('article-{{$article->getRouteKey()}}-delete-form').submit()" class="btn btn-danger">@lang('common.delete')</a>
+                            <form id="article-{{$article->getRouteKey()}}-delete-form" style="display: none" method="POST" action="{{ route('articles.destroy', ['article' => $article]) }}">
+                                @csrf
+                                @method('DELETE')
+                            </form>
+                            @endcan
                         </div>
                     </div>
                 </div>
