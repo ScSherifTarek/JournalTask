@@ -53,9 +53,10 @@ class Author extends User
     }
 
     /**
-     * Scope a query to order authors by popularity.
+     * Scope a query to order authors by this author first
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  \Illuminate\Database\Eloquent\Builder    $query
+     * @param  \App\Author                              $author
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeThisAuthorFirst(Builder $query, Author $author): Builder
