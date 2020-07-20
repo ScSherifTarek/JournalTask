@@ -18,6 +18,7 @@ class CreateArticlesTable extends Migration
             $table->string('title');
             $table->text('description');
             $table->unsignedBigInteger('author_id');
+            $table->boolean('is_approved')->default(false);
             $table->timestamps();
 
             // Indexes
