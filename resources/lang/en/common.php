@@ -8,4 +8,5 @@ return [
 	'edit' => 'edit',
 	'delete' => 'delete',
 	'approve' => 'approve',
+	'add' => 'add',
 ];

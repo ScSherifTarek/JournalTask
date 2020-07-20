@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <h1>{{ config('app.name', 'Laravel') }}</h1>
+        <h1>{{ config('app.name', 'Laravel') }} <a href="{{ route('articles.create') }}" class="badge badge-primary">{{ trans('common.add') }}</a></h1>
     </div>
 </div>
 
