@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Article extends Model
@@ -71,5 +72,16 @@ class Article extends Model
     {
         $this->is_approved = True;
         return $this->save();
+    }
+
+    /**
+     * Scope a query to include only approved articles.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeApproved(Builder $query): Builder
+    {
+        return $query->where('is_approved', true);
     }
 }
