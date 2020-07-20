@@ -10,7 +10,7 @@ To install the application run the following commands
 
 1. clone the repo
 ``` bash
-git clone https://github.com/ScSherifTarek/JournalTask
+git clone https://github.com/ScSherifTarek/JournalTask && cd JournalTask
 ```
 
 2. Install back-end packages
