@@ -5,4 +5,5 @@ return [
 	'title' => 'Title',
 	'description' => 'Description',
 	'submit' => 'submit',
+	'edit' => 'edit',
 ];

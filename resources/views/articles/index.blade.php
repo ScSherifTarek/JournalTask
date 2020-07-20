@@ -17,7 +17,9 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ $article->title }}</h5>
                             <p class="card-text">{{ $article->description }}</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                            @can('update',$article)
+                            <a href="{{ route('articles.edit', ['article' => $article]) }}" class="btn btn-success">@lang('common.edit')</a>
+                            @endcan
                         </div>
                     </div>
                 </div>
