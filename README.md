@@ -1,4 +1,58 @@
 # JournalTask
+A web application to manage articles posting
+
+# Installation
+
+The application is developed using [Laravel](https://laravel.com/) (PHP Framework), so make sure you meet it's last stable version requirements, also we would need to use a package manager for the front end package we would move with [yarn](https://yarnpkg.com/) in our steps but you can use whatever you want.
+
+
+To install the application run the following commands
+
+1. clone the repo
+``` bash
+git clone https://github.com/ScSherifTarek/JournalTask && cd JournalTask
+```
+
+2. Install back-end packages
+``` bash
+composer install
+```
+
+3. Install front-end packages
+``` bash
+yarn
+```
+
+4. Setup your enviorment variables, you should setup your database configruations here
+``` bash
+cp .env.example .env
+```
+
+5. Generate APP_KEY
+``` bash
+php artisan key:generate
+```
+
+6. Run our migrations to setup the database tables
+``` bash
+php artisan migrate
+```
+
+7. Compile our assets
+``` bash
+npm run dev
+```
+
+8. As an optional step we made for you a command to make an admin (Samir) for you, run the following command whenever you need one
+``` bash
+php artisan make:admin
+```
+run `php artisan help make:admin` to see the other options, you can pass an email and a password if you prefer to
+
+9. As an optional step we have developed a seeder for you so you can work directly with some fake data, to generate some fake records run the following command
+``` bash
+php artisan db:seed
+```
 
 # Description
 - Fork the repo to your Github https://help.github.com/en/articles/fork-a-repo.
