@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use App\Author;
 use App\Article;
 use Illuminate\View\View;
+use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\ArticleFormRequest;
 
@@ -12,7 +14,7 @@ class ArticleController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except(['index']);
+        $this->middleware('auth');
         $this->middleware('can:update,article')->only(['edit','update']);
         $this->middleware('can:delete,article')->only(['delete']);
         $this->middleware('can:approve,article')->only(['approve']);
@@ -23,11 +25,12 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function index(): View
+    public function index(Request $request): View
     {
         $authors = Author::select('id','name')
                     ->with('articles:id,title,description,is_approved,author_id')
                     ->withCount('articles')
+                    ->orderBy(DB::raw('id = '.DB::connection()->getPdo()->quote($request->user()->getKey())), 'DESC')
                     ->orderBy('articles_count', 'desc')
                     ->having('articles_count', '>', 0)
                     ->get();
