@@ -15,6 +15,7 @@ class ArticleController extends Controller
         $this->middleware('auth')->except(['index']);
         $this->middleware('can:update,article')->only(['edit','update']);
         $this->middleware('can:delete,article')->only(['delete']);
+        $this->middleware('can:approve,article')->only(['approve']);
     }
 
     /**
@@ -97,6 +98,19 @@ class ArticleController extends Controller
     public function destroy(Article $article): RedirectResponse
     {
         $article->delete();
+
+        return redirect()->route('articles.index');
+    }
+
+    /**
+     * approve the given article
+     *
+     * @param  \App\Article  $article
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function approve(Article $article): RedirectResponse
+    {
+        $article->approve();
 
         return redirect()->route('articles.index');
     }
