@@ -7,4 +7,5 @@ return [
 	'submit' => 'submit',
 	'edit' => 'edit',
 	'delete' => 'delete',
+	'approve' => 'approve',
 ];
