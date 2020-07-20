@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Author;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class HomeController extends Controller
 {
@@ -17,7 +17,7 @@ class HomeController extends Controller
     public function index(Request $request): View
     {
         $q = Author::select('id','name')
-                    ->with(['articles' => function(Builder $query) {
+                    ->with(['articles' => function(HasMany $query) {
                     	$query->approved()->select('id', 'title', 'description', 'is_approved', 'author_id');
                     }]);
 
