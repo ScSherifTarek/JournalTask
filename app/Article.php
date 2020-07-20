@@ -24,6 +24,17 @@ class Article extends Model
     ];
 
     /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'title' => 'string',
+        'description' => 'string',
+        'is_approved' => 'boolean',
+    ];
+
+    /**
      * Every user may have one or more articles
      * 
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -41,5 +52,24 @@ class Article extends Model
     public function isWrittenBy(Author $author): bool
     {
         return $this->author_id === $author->getKey();
+    }
+
+    /**
+     * Check if this article is approved
+     * @return boolean
+     */
+    public function isApproved(): bool
+    {
+        return $this->is_approved;
+    }
+
+    /**
+     * Check if this article is approved
+     * @return boolean
+     */
+    public function approve(): bool
+    {
+        $this->is_approved = True;
+        return $this->save();
     }
 }
