@@ -4,21 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Author;
 use App\Article;
-use Illuminate\Http\Request;
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
+use App\Http\Requests\ArticleFormRequest;
 
 class ArticleController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['index']]);
+        $this->middleware('auth')->except(['index']);
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
-    public function index()
+    public function index(): View
     {
         $authors = Author::select('id','name')
                     ->with('articles:id,title,description,author_id')
@@ -33,9 +35,9 @@ class ArticleController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
-    public function create(Article $article)
+    public function create(Article $article): View
     {
         return view('articles.form', compact('article'));
     }
@@ -43,21 +45,25 @@ class ArticleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  \App\Http\Requests\ArticleFormRequest  $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request, Article $article)
+    public function store(ArticleFormRequest $request): RedirectResponse
     {
-        $this->update($request, $article);
+        $validatedData = $request->validated();
+        
+        $request->user()->articles()->create($validatedData);
+
+        return redirect()->route('articles.index');
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Article  $article
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
-    public function edit(Article $article)
+    public function edit(Article $article): View
     {
         return view('articles.form', compact('article'));
     }
@@ -65,16 +71,13 @@ class ArticleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\ArticleFormRequest  $request
      * @param  \App\Article  $article
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, Article $article)
+    public function update(ArticleFormRequest $request, Article $article): RedirectResponse
     {
-        $validatedData = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string|max:1000',
-        ]);
+        $validatedData = $request->validated();
 
         $article->fill($validatedData);
 
@@ -87,9 +90,9 @@ class ArticleController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Article  $article
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Article $article)
+    public function destroy(Article $article): RedirectResponse
     {
         //
     }
