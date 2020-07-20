@@ -21,4 +21,16 @@ class ArticlePolicy
     {
         return $author->isAdmin() || $article->isWrittenBy($author);
     }
+
+    /**
+     * Determine whether the user can delete the model.
+     *
+     * @param  \App\Author  $author
+     * @param  \App\Article  $article
+     * @return mixed
+     */
+    public function delete(Author $author, Article $article)
+    {
+        return $author->isAdmin();
+    }
 }
