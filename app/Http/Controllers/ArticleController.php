@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use DB;
 use App\Author;
 use App\Article;
 use Illuminate\View\View;
@@ -29,10 +28,8 @@ class ArticleController extends Controller
     {
         $authors = Author::select('id','name')
                     ->with('articles:id,title,description,is_approved,author_id')
-                    ->withCount('articles')
-                    ->orderBy(DB::raw('id = '.DB::connection()->getPdo()->quote($request->user()->getKey())), 'DESC')
-                    ->orderBy('articles_count', 'desc')
-                    ->having('articles_count', '>', 0)
+                    ->thisAuthorFirst($request->user())
+                    ->popularFirst()
                     ->get();
         
         return view('articles.index', compact('authors'));
