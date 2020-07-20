@@ -14,6 +14,7 @@ class ArticleController extends Controller
     {
         $this->middleware('auth')->except(['index']);
         $this->middleware('can:update,article')->only(['edit','update']);
+        $this->middleware('can:delete,article')->only(['delete']);
     }
 
     /**
@@ -95,6 +96,8 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article): RedirectResponse
     {
-        //
+        $article->delete();
+
+        return redirect()->route('articles.index');
     }
 }
