@@ -32,4 +32,14 @@ class Article extends Model
     {
         return $this->belongsTo(Author::class, 'author_id', 'id', 'users');
     }
+
+    /**
+     * Is the given author my author
+     * @param  \App\Author  $author
+     * @return boolean
+     */
+    public function isWrittenBy(Author $author): bool
+    {
+        return $this->author_id === $author->getKey();
+    }
 }
