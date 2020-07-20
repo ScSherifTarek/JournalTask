@@ -26,7 +26,7 @@ class ArticleController extends Controller
     public function index(): View
     {
         $authors = Author::select('id','name')
-                    ->with('articles:id,title,description,author_id')
+                    ->with('articles:id,title,description,is_approved,author_id')
                     ->withCount('articles')
                     ->orderBy('articles_count', 'desc')
                     ->having('articles_count', '>', 0)
