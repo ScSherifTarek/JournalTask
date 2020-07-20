@@ -33,7 +33,7 @@ class Author extends User
      */
     public function makeAdmin(): bool
     {
-    	$this->role == 'admin';
+    	$this->role = 'admin';
     	return $this->save();
     }
 }
