@@ -54,6 +54,11 @@ run `php artisan help make:admin` to see the other options, you can pass an emai
 php artisan db:seed
 ```
 
+10. And finally run
+``` bash
+php artisan serve
+```
+
 # Description
 - Fork the repo to your Github https://help.github.com/en/articles/fork-a-repo.
 - Push your work to your forked repo "user-name/JournalTask".
