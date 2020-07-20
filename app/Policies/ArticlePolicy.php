@@ -33,4 +33,16 @@ class ArticlePolicy
     {
         return $author->isAdmin();
     }
+
+    /**
+     * Determine whether the user can approve the model.
+     *
+     * @param  \App\Author  $author
+     * @param  \App\Article  $article
+     * @return mixed
+     */
+    public function approve(Author $author, Article $article)
+    {
+        return $author->isAdmin();
+    }
 }
