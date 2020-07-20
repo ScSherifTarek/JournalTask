@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::redirect('/', 'articles')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 
 Route::resource('articles', 'ArticleController', ['except' => ['show']]);
 
