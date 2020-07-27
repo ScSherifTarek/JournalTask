@@ -15,7 +15,7 @@ class ArticleController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('can:update,article')->only(['edit','update']);
-        $this->middleware('can:delete,article')->only(['delete']);
+        $this->middleware('can:delete,article')->only(['destroy']);
         $this->middleware('can:approve,article')->only(['approve']);
     }
 
